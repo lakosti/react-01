@@ -1,6 +1,7 @@
 // import picture from "./public/vite.svg";
 import css from "./ProductCard.module.css";
 import cn from "classnames";
+import { BsCartCheck } from "react-icons/bs";
 
 //створення компонента -- rafce (сніпет)
 const ProductCard = ({
@@ -43,7 +44,7 @@ const ProductCard = ({
       <p className={css.cardDesc}>{text}</p>
       <div className={css.wrapperBtn}>
         <button className={css.cardAddToCardBtn} type="button">
-          Add to card
+          <BsCartCheck /> Add to card
         </button>
         <button className={css.cardRemoveBtn} type="button">
           Remove
