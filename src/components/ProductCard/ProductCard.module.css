@@ -1,0 +1,39 @@
+.cardImg {
+  max-width: 450px;
+  padding-bottom: 12px;
+  margin: 0 auto 12px;
+}
+.cardTitle {
+  border-top: 2px solid rgb(196, 174, 174);
+  padding: 12px;
+  font-size: 28px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.cardDesc {
+  font-size: 18px;
+  font-style: italic;
+}
+.cardPrice {
+  font-size: 22px;
+}
+.cardAddToCardBtn {
+  max-width: 100px;
+  background-color: var(--add-color);
+  color: white;
+  border-color: transparent;
+  padding: 10px;
+  border-radius: 15px;
+}
+.cardRemoveBtn {
+  max-width: 100px;
+  background-color: var(--remove-color);
+  color: white;
+  border-color: transparent;
+  padding: 10px;
+  border-radius: 15px;
+}
+.wrapperBtn {
+  display: flex;
+  gap: 10px;
+}

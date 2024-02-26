@@ -1,5 +1,5 @@
 import "./App.css";
-import ProductCard from "./components/ProductCard";
+import ProductCard from "./components/ProductCard/ProductCard";
 import MailBox from "./components/MailBox";
 
 // const productData = [
