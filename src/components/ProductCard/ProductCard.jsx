@@ -1,19 +1,36 @@
 // import picture from "./public/vite.svg";
 import css from "./ProductCard.module.css";
+import cn from "classnames";
 
 //створення компонента -- rafce (сніпет)
-const ProductCard = ({ img, title, price, text, hasDiscount = false }) => {
+const ProductCard = ({
+  img,
+  title,
+  price,
+  text,
+  hasDiscount = false,
+  promotional = false,
+  quantity,
+}) => {
   //інлайн стилі + трошки дж (використ для якогось руху( карточок) не бажано так )
-  const cardStyle = {
-    display: "flex",
-    flexDirection: "column",
-    border: hasDiscount ? "2px solid green" : "2px solid black",
-    borderRadius: "20px",
-    padding: "20px",
-  };
+  // const cardStyle = {
+  //   display: "flex",
+  //   flexDirection: "column",
+  //   border: hasDiscount ? "2px solid green" : "2px solid black",
+  //   borderRadius: "20px",
+  //   padding: "20px",
+  // };
 
+  //ПЕРЕВІРКА / ДОДАВАННЯ ІНШОГО СТИЛЮ
+  // <div className={`${css.card} ${promotional ? css.cardPromotion : ''}`}>
+  // const addClass = [css.card, promotional ? css.cardPromotion : ""];
   return (
-    <div style={cardStyle}>
+    // <div style={cardStyle}>
+    <div
+      className={cn(css.card, {
+        [css.cardPromotion]: promotional,
+      })}
+    >
       {/* <img src={picture} alt="" /> */}
       <img className={css.cardImg} src={img} alt="" width={400} />
       <h3 className={css.cardTitle}>
@@ -21,6 +38,8 @@ const ProductCard = ({ img, title, price, text, hasDiscount = false }) => {
         {/* {props.hasDiscount && <span> BIG SALE</span>} */}
       </h3>
       <p className={css.cardPrice}>Price: {price}</p>
+      <p className={css.cardPrice}>Left items: {quantity}</p>
+
       <p className={css.cardDesc}>{text}</p>
       <div className={css.wrapperBtn}>
         <button className={css.cardAddToCardBtn} type="button">

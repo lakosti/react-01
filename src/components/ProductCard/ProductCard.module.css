@@ -1,7 +1,17 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 20px;
+}
 .cardImg {
   max-width: 450px;
   padding-bottom: 12px;
   margin: 0 auto 12px;
+}
+.cardPromotion {
+  background-color: rgb(218, 217, 150);
 }
 .cardTitle {
   border-top: 2px solid rgb(196, 174, 174);
