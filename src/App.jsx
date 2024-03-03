@@ -6,10 +6,16 @@ import productData from "./productData"; // json object
 //компонент певний шаблон з даними який може бути перевикористаний
 // синтаксис XML розмітка JSX
 function App() {
+  const onLogEmail = () => {
+    console.log("Email was sent"); // ФУНКЦІЇ ЗВОРОТНЬОГО ВИКЛИКУ
+  };
+  const deleteById = (id) => {
+    console.log(id);
+  };
   return (
     //повертаєм лише один елемент (один загальний контейнер) якщо не потрібен дів то просто ставимо пустий тег (реакт фрагмент)
     <div>
-      <MailBox />
+      <MailBox onLogEmail={onLogEmail} onDeleteEmail={deleteById} />
       <ProductGallery productData={productData} />
       {/* 
       <ProductCard
