@@ -1,3 +1,4 @@
+import { useState } from "react";
 import MailBox from "./components/MailBox";
 import ProductGallery from "./components/ProductGallery/ProductGallery";
 
@@ -5,17 +6,46 @@ import productData from "./productData"; // json object
 
 //компонент певний шаблон з даними який може бути перевикористаний
 // синтаксис XML розмітка JSX
+const emailsData = [
+  { id: "1", email: "alex@example.com" },
+  { id: "2", email: "oleg@example.com" },
+  { id: "3", email: "igor@example.com" },
+];
+
 function App() {
+  //!  гетер(ініціазізуємо)  сетер(функція -- встановлюємо/оновлюємо)
+  const [counter, setCounter] = useState(0);
+  const [emails, setEmails] = useState(emailsData);
+  //!показувати чи ховати розмітку
+  const [showMailBox, setshowMailBox] = useState(false);
+
   const onLogEmail = () => {
     console.log("Email was sent"); // ФУНКЦІЇ ЗВОРОТНЬОГО ВИКЛИКУ
+    // setCounter(counter + 1);
+    setCounter((prevState) => prevState + 1);
   };
   const deleteById = (id) => {
-    console.log(id);
+    //!ВИДАЛЕННЯ ЕЛЕМЕНТА
+    // setEmails(emails.filter((email) => email.id !== id));
+    setEmails((prevState) => prevState.filter((email) => email.id !== id));
+  };
+  //!показувати чи ховати розмітку
+  const handleShowMail = () => {
+    setshowMailBox((prevState) => !prevState);
   };
   return (
     //повертаєм лише один елемент (один загальний контейнер) якщо не потрібен дів то просто ставимо пустий тег (реакт фрагмент)
     <div>
-      <MailBox onLogEmail={onLogEmail} onDeleteEmail={deleteById} />
+      <h1> Email counter: {counter}</h1>
+      <button onClick={handleShowMail}>{showMailBox ? "Hide" : "Show"} MailBox</button>
+      {showMailBox ? (
+        <MailBox
+          emails={emails}
+          emailCounter={counter}
+          onLogEmail={onLogEmail}
+          onDeleteEmail={deleteById}
+        />
+      ) : null}
       <ProductGallery productData={productData} />
       {/* 
       <ProductCard
