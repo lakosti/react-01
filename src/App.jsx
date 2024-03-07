@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MailBox from "./components/MailBox";
 import ProductGallery from "./components/ProductGallery/ProductGallery";
 
 import productData from "./productData"; // json object
+import ClickCounter from "./components/ClickCounter";
 
 //компонент певний шаблон з даними який може бути перевикористаний
 // синтаксис XML розмітка JSX
@@ -16,6 +17,8 @@ function App() {
   //!  гетер(ініціазізуємо)  сетер(функція -- встановлюємо/оновлюємо)
   const [counter, setCounter] = useState(0);
   const [emails, setEmails] = useState(emailsData);
+  const [clicks, setClicks] = useState(0);
+
   //!показувати чи ховати розмітку
   const [showMailBox, setshowMailBox] = useState(false);
 
@@ -33,9 +36,17 @@ function App() {
   const handleShowMail = () => {
     setshowMailBox((prevState) => !prevState);
   };
+
+  const handleClick = () => {
+    setClicks(clicks + 1);
+  };
+
   return (
     //повертаєм лише один елемент (один загальний контейнер) якщо не потрібен дів то просто ставимо пустий тег (реакт фрагмент)
     <div>
+      <ClickCounter value={clicks} onUpdate={handleClick} />
+      <ClickCounter value={clicks} onUpdate={handleClick} />
+      <button onClick={() => setClicks(clicks + 1)}>You clicked {clicks} times</button>
       <h1> Email counter: {counter}</h1>
       <button onClick={handleShowMail}>{showMailBox ? "Hide" : "Show"} MailBox</button>
       {showMailBox ? (
