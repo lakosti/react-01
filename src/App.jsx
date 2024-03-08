@@ -51,9 +51,13 @@ function App() {
     <div>
       <ClickCounter value={clicks} onUpdate={handleClick} />
       <ClickCounter value={clicks} onUpdate={handleClick} />
+
       <button onClick={() => setClicks(clicks + 1)}>You clicked {clicks} times</button>
+
       <h1> Email counter: {counter}</h1>
+
       <button onClick={handleShowMail}>{showMailBox ? "Hide" : "Show"} MailBox</button>
+
       {showMailBox ? (
         <MailBox
           emails={emails}
@@ -62,6 +66,7 @@ function App() {
           onDeleteEmail={deleteById}
         />
       ) : null}
+
       <ProductGallery productData={productData} />
       {/* 
       <ProductCard
