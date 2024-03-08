@@ -5,6 +5,11 @@ import ProductGallery from "./components/ProductGallery/ProductGallery";
 import productData from "./productData"; // json object
 import ClickCounter from "./components/ClickCounter";
 
+//! useEffect використовують для
+//* надсилання мережевих запитів
+//* дадавати глобальні слухачі (addEventListener) і  SetTimeout/setInterval
+//* зчитати дані з LocalStorage
+
 //компонент певний шаблон з даними який може бути перевикористаний
 // синтаксис XML розмітка JSX
 const emailsData = [
@@ -14,12 +19,12 @@ const emailsData = [
 ];
 
 function App() {
-  //!  гетер(ініціазізуємо)  сетер(функція -- встановлюємо/оновлюємо)
+  //*  гетер(ініціазізуємо)  сетер(функція -- встановлюємо/оновлюємо)
   const [counter, setCounter] = useState(0);
   const [emails, setEmails] = useState(emailsData);
   const [clicks, setClicks] = useState(0);
 
-  //!показувати чи ховати розмітку
+  //*показувати чи ховати розмітку
   const [showMailBox, setshowMailBox] = useState(false);
 
   const onLogEmail = () => {
@@ -28,11 +33,11 @@ function App() {
     setCounter((prevState) => prevState + 1);
   };
   const deleteById = (id) => {
-    //!ВИДАЛЕННЯ ЕЛЕМЕНТА
+    //*ВИДАЛЕННЯ ЕЛЕМЕНТА
     // setEmails(emails.filter((email) => email.id !== id));
     setEmails((prevState) => prevState.filter((email) => email.id !== id));
   };
-  //!показувати чи ховати розмітку
+  //*показувати чи ховати розмітку
   const handleShowMail = () => {
     setshowMailBox((prevState) => !prevState);
   };
