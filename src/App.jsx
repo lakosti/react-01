@@ -8,9 +8,9 @@ import ClickCounter from "./components/ClickCounter";
 //компонент певний шаблон з даними який може бути перевикористаний
 // синтаксис XML розмітка JSX
 const emailsData = [
-  { id: "1", email: "alex@example.com" },
-  { id: "2", email: "oleg@example.com" },
-  { id: "3", email: "igor@example.com" },
+  { id: "1", email: "alex@example.com", userName: "Arab" },
+  { id: "2", email: "oleg@example.com", userName: "Alex" },
+  { id: "3", email: "igor@example.com", userName: "Igor" },
 ];
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
   //*показувати чи ховати розмітку
   const [showMailBox, setshowMailBox] = useState(false);
 
-  //? РОБОТА ЗІ СХОВИЩЕМ (ОТРИМАННЯ З)
+  //? РОБОТА ЗІ СХОВИЩЕМ (ОТРИМАННЯ З) + ВИДАЛЕННЯ
   const [emails, setEmails] = useState(() => {
     const stringifiedEmail = localStorage.getItem("emails");
     if (!stringifiedEmail) return emailsData; // якщо нічого немає поверни об'єкт
