@@ -4,6 +4,8 @@ import ProductGallery from "./components/ProductGallery/ProductGallery";
 
 import productData from "./productData"; // json object
 import ClickCounter from "./components/ClickCounter";
+import { nanoid } from "nanoid";
+import MailBoxForm from "./components/MailBoxForm/MailBoxForm";
 
 //компонент певний шаблон з даними який може бути перевикористаний
 // синтаксис XML розмітка JSX
@@ -53,6 +55,17 @@ function App() {
     setEmails((prevState) => prevState.filter((email) => email.id !== id));
   };
   //*ДОДАВАННЯ ЕЛЕМЕНТА
+  const onAddNewEmailData = (mailData) => {
+    //ств новий об'єкт куди розпилюємо старі значення (імя та імейл) і додаємо власноруч айді (через бібліотеку)
+    const newEmail = {
+      ...newEmail,
+      id: nanoid(),
+    };
+    //розпилюємо старі об'єкти і додаємо новий
+    // setEmails([...emails, newEmail]);
+    setEmails((prevState) => [...prevState, newEmail]);
+  };
+  /////////////////////////////////
   // const addElement = (el = {
   //   id: "123", email:"elex.com"}) =>{
   //   setEmails(prevState => [...prevState, el])
@@ -73,9 +86,9 @@ function App() {
       <ClickCounter value={clicks} onUpdate={handleClick} />
 
       <button onClick={() => setClicks(clicks + 1)}>You clicked {clicks} times</button>
-
       <h1> Email counter: {counter}</h1>
 
+      <MailBoxForm />
       <button onClick={handleShowMail}>{showMailBox ? "Hide" : "Show"} MailBox</button>
 
       {showMailBox ? (
