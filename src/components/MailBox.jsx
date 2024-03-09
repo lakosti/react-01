@@ -28,21 +28,22 @@ const MailBox = ({ onClose, emails, onLogEmail, onDeleteEmail, emailCounter }) =
   // };
 
   useEffect(() => {
-    const onMouseMove = () => {
-      console.log("mouseMove");
-    };
+    //*ПОДІЯ МИШІ
+    // const onMouseMove = () => {
+    //   console.log("mouseMove");
+    // };
     const onKeyDown = (evt) => {
       if (evt.code === "Escape") {
         onClose();
       }
     };
     window.addEventListener("keydown", onKeyDown);
-    window.addEventListener("mousemove", onMouseMove); //!додавання слухача
+    // window.addEventListener("mousemove", onMouseMove); //!додавання слухача
     console.log("Element has been mounted"); //! МОНТУВАННЯ
 
     return () => {
       window.removeEventListener("keydown", onKeyDown);
-      window.removeEventListener("mousemove", onMouseMove); //!видалення слухача
+      // window.removeEventListener("mousemove", onMouseMove); //!видалення слухача
       console.log("Element has been UNmounted"); //! ДЕМОНТУВАННЯ
     };
   }, [onClose]); //*слідкує за цими змінами/даними/залежностями (зовнішні дані)
