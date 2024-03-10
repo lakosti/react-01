@@ -12,10 +12,20 @@ const MailBoxForm = ({ addNewData }) => {
     evt.preventDefault();
 
     //*витягуємо дані з форми
-    const { userName, email } = evt.currentTarget.elements; //? input
+    // const { userName, email } = evt.currentTarget.elements; //? input
+    // const formData = {
+    //   userName: userName.value, //? value
+    //   email: email.value,
+    // };
+    //? second variat
+    const elements = evt.currentTarget.elements;
+
+    const userName = elements.userName.value;
+    const email = elements.email.value;
+
     const formData = {
-      userName: userName.value, //? value
-      email: email.value,
+      userName,
+      email,
     };
 
     //* викликаємо функцію додавання поля
