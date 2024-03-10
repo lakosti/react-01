@@ -54,7 +54,12 @@ const MailBox = ({ onClose, emails, onLogEmail, onDeleteEmail, emailCounter }) =
       <ul>
         {emails.map((email) => (
           <li key={email.id}>
-            {email.email}
+            <p>
+              User email: <b>{email.email}</b>
+            </p>
+            <p>
+              User name: <b>{email.userName}</b>
+            </p>
             <button onClick={() => onDeleteEmail(email.id)}>&times;</button>
           </li>
         ))}

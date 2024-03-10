@@ -58,7 +58,7 @@ function App() {
   const onAddNewEmailData = (mailData) => {
     //ств новий об'єкт куди розпилюємо старі значення (імя та імейл) і додаємо власноруч айді (через бібліотеку)
     const newEmail = {
-      ...newEmail,
+      ...mailData,
       id: nanoid(),
     };
     //розпилюємо старі об'єкти і додаємо новий
@@ -88,7 +88,7 @@ function App() {
       <button onClick={() => setClicks(clicks + 1)}>You clicked {clicks} times</button>
       <h1> Email counter: {counter}</h1>
 
-      <MailBoxForm />
+      <MailBoxForm addNewData={onAddNewEmailData} />
       <button onClick={handleShowMail}>{showMailBox ? "Hide" : "Show"} MailBox</button>
 
       {showMailBox ? (
