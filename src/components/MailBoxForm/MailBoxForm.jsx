@@ -6,7 +6,7 @@
 import { MdOutlinePersonAdd } from "react-icons/md";
 import css from "./MailBoxForm.module.css";
 
-//!НЕКОНТРОЛЬОВАНА ФОРМА
+//!НЕКОНТРОЛЬОВАНА ФОРМА -- дані потрібні тільки під час сабміту
 const MailBoxForm = ({ addNewData }) => {
   const handleFormSubmit = (evt) => {
     evt.preventDefault();

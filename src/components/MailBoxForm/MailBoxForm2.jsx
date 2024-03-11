@@ -2,7 +2,7 @@ import { MdOutlinePersonAdd } from "react-icons/md";
 import css from "./MailBoxForm.module.css";
 import { useState } from "react";
 
-//!КОНТРОЛЬОВАНА ФОРМА
+//!КОНТРОЛЬОВАНА ФОРМА -- дані потрібні весь час - бо на основі попередніх даних формуються інші
 const MailBoxForm2 = ({ addNewData }) => {
   //* створюємо стейст для відображення інтерактивності у формі (контрольована форма)
   //   const [userName, setUserName] = useState("");
@@ -70,7 +70,7 @@ const MailBoxForm2 = ({ addNewData }) => {
       <label className={css.labelForm}>
         <span>Enter your email: </span>
         <input
-          onChange={handleChange} //? ВІШАЄМО ОБРОБНИК НА ІНПУТ
+          onChange={handleChange}
           className={css.input}
           placeholder="alex.igorov@gmail.com"
           type="email"
@@ -79,7 +79,7 @@ const MailBoxForm2 = ({ addNewData }) => {
           required
         />
       </label>
-      {/* // * ДОДАЄМО ІНТЕРАКТИВНІСТЬ (ПРОМОКОД)  */}
+      {/* // ? ДОДАЄМО ІНТЕРАКТИВНІСТЬ (ПРОМОКОД)  */}
       {values.userName === "slava2024" && (
         <p> Congratulations! You`re winner! Your promo: winner_4587</p>
       )}
