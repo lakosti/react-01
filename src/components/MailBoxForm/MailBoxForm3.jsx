@@ -1,13 +1,7 @@
-//?ЧОМУ САБМІТ ВІШАЄМО НА ФОРМУ:
-//* вспливання подій
-//* збір даних з інтутів(неконтр форма)
-//* сабміт по ентеру
-
 import { MdOutlinePersonAdd } from "react-icons/md";
 import css from "./MailBoxForm.module.css";
 
-//!НЕКОНТРОЛЬОВАНА ФОРМА
-const MailBoxForm = ({ addNewData }) => {
+const MailBoxForm3 = ({ addNewData }) => {
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
 
@@ -17,7 +11,6 @@ const MailBoxForm = ({ addNewData }) => {
     //   userName: userName.value, //? value
     //   email: email.value,
     // };
-
     //? second variat
     const elements = evt.currentTarget.elements;
 
@@ -36,7 +29,7 @@ const MailBoxForm = ({ addNewData }) => {
   };
   return (
     <form onSubmit={handleFormSubmit} className={css.form}>
-      <h2 className={css.title}>UNCONTROLL FORM</h2>
+      <h2 className={css.title}>FORMIK</h2>
       <label className={css.labelForm}>
         <span>Enter your name: </span>
         <input
@@ -69,4 +62,4 @@ const MailBoxForm = ({ addNewData }) => {
   );
 };
 
-export default MailBoxForm;
+export default MailBoxForm3;

@@ -6,6 +6,8 @@ import productData from "./productData"; // json object
 import ClickCounter from "./components/ClickCounter";
 import { nanoid } from "nanoid";
 import MailBoxForm from "./components/MailBoxForm/MailBoxForm";
+import MailBoxForm2 from "./components/MailBoxForm/MailBoxForm2";
+import MailBoxForm3 from "./components/MailBoxForm/MailBoxForm3";
 
 //компонент певний шаблон з даними який може бути перевикористаний
 // синтаксис XML розмітка JSX
@@ -89,6 +91,9 @@ function App() {
       <h1> Email counter: {counter}</h1>
 
       <MailBoxForm addNewData={onAddNewEmailData} />
+      <MailBoxForm2 addNewData={onAddNewEmailData} />
+      <MailBoxForm3 addNewData={onAddNewEmailData} />
+
       <button onClick={handleShowMail}>{showMailBox ? "Hide" : "Show"} MailBox</button>
 
       {showMailBox ? (
