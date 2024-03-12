@@ -12,9 +12,27 @@ import MailBoxForm3 from "./components/MailBoxForm/MailBoxForm3";
 //компонент певний шаблон з даними який може бути перевикористаний
 // синтаксис XML розмітка JSX
 const emailsData = [
-  { id: "1", email: "alex@example.com", userName: "Arab" },
-  { id: "2", email: "oleg@example.com", userName: "Alex" },
-  { id: "3", email: "igor@example.com", userName: "Igor" },
+  {
+    id: "1",
+    email: "alex@example.com",
+    userName: "Arab",
+    preferredColor: null,
+    subscription: "standart",
+  },
+  {
+    id: "2",
+    email: "oleg@example.com",
+    userName: "Alex",
+    preferredColor: null,
+    subscription: "vip",
+  },
+  {
+    id: "3",
+    email: "igor@example.com",
+    userName: "Igor",
+    preferredColor: null,
+    subscription: "premium",
+  },
 ];
 
 function App() {

@@ -12,12 +12,18 @@ const MailBoxSchema = Yup.object().shape({
     .max(50, "User name must be less than 50 characters!!")
     .required("User name is required"),
   email: Yup.string().email("Must be a valid email!").required("Required"),
+  preferredColor: Yup.string().oneOf(["red", "green", "blue"]).required("Color is required"),
+  subscription: Yup.string()
+    .oneOf(["standart", "vip", "premium"])
+    .required("Subscription is required"),
 });
 
 //* гарною практикою є винесення це у змінну
 const INITIAL_FROM_DATA = {
   userName: "",
   email: "",
+  preferredColor: "",
+  subscription: "",
 };
 
 const MailBoxForm3 = ({ addNewData }) => {
@@ -49,6 +55,31 @@ const MailBoxForm3 = ({ addNewData }) => {
             name="email"
           />
           <ErrorMessage className={css.errorMsg} name="email" component="p" />
+        </label>
+        <div>
+          {/* //?ЩОБ ВИБИРАЛАСЬ ОДНА КНОПКА З БАГАТЬОХ ПОТРІБНО ОДИНАКОВИЙ NAME */}
+          <label>
+            <span>Red</span>
+            <Field type="radio" value="red" name="preferredColor" />
+          </label>
+          <label>
+            <span>Green</span>
+            <Field type="radio" value="green" name="preferredColor" />
+          </label>
+          <label>
+            <span>Blue</span>
+            <Field type="radio" value="blue" name="preferredColor" />
+          </label>
+          <ErrorMessage className={css.errorMsg} name="preferredColor" component="p" />
+        </div>
+        <label>
+          <span>Select user subscription: </span>
+          <Field as="select" name="subscription">
+            <option value="standart">standart</option>
+            <option value="vip">vip</option>
+            <option value="premium">premium</option>
+            <ErrorMessage className={css.errorMsg} name="subscription" component="p" />
+          </Field>
         </label>
         <button
           className={css.btn}

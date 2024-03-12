@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import css from "./MailBox.module.css";
 /*
 !Реакція на монтування компоненти:
   *1. Надсилати мережеві запити, коли компонента відмалювалася.
@@ -14,8 +16,6 @@
 */
 
 //?СИНТЕТИЧНА ПОДІЯ (evt) - ЩОБ РЕАКТ ПРАЦЮВАВ У ВСІХ БРАУЗЕРАХ ОДНАКОВО(кросбраузерність)
-
-import { useEffect } from "react";
 
 const MailBox = ({ onClose, emails, onLogEmail, onDeleteEmail, emailCounter }) => {
   // const handleClick = (evt) => {
@@ -47,31 +47,38 @@ const MailBox = ({ onClose, emails, onLogEmail, onDeleteEmail, emailCounter }) =
       console.log("Element has been UNmounted"); //! ДЕМОНТУВАННЯ
     };
   }, [onClose]); //*слідкує за цими змінами/даними/залежностями (зовнішні дані)
-
   return (
     <div>
       <h2>MailBox: {emailCounter}</h2>
       <ul>
-        {emails.map((email) => (
-          <li key={email.id}>
-            <p>
-              User email: <b>{email.email}</b>
-            </p>
-            <p>
-              User name: <b>{email.userName}</b>
-            </p>
-            <button onClick={() => onDeleteEmail(email.id)}>&times;</button>
-          </li>
-        ))}
-        {/* <li>
-          Mail 1 <button onClick={() => onDeleteEmail(1)}>&times;</button>
-        </li>
-        <li>
-          Mail 2 <button onClick={() => onDeleteEmail(2)}>&times;</button>
-        </li>
-        <li>
-          Mail 3 <button onClick={() => onDeleteEmail(3)}>&times;</button>
-        </li> */}
+        {emails.map((email) => {
+          //*якщо колір не нал тоді відображаємо цей колір, інакше відображаємо сірий
+          const userPreferredColor = email.preferredColor !== null ? email.preferredColor : "grey";
+
+          return (
+            <li key={email.id}>
+              <p>
+                User email: <b>{email.email}</b>
+              </p>
+              <p>
+                User name:{" "}
+                <span
+                  style={{
+                    backgroundColor: userPreferredColor,
+                  }}
+                  className={css.itemColor}
+                ></span>{" "}
+                <b>{email.userName}</b>
+              </p>
+              <p>
+                Type of subscription: {'"'}
+                {email.subscription}
+                {'"'}
+              </p>
+              <button onClick={() => onDeleteEmail(email.id)}>&times;</button>
+            </li>
+          );
+        })}
       </ul>
       <button onClick={onLogEmail} type="button">
         Send mail
