@@ -1,12 +1,14 @@
-import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import ErrorMessage from "./components/HTTPS/ErrorMessage/ErrorMessage";
 import Loader from "./components/HTTPS/Loader/Loader";
 import ProductList from "./components/HTTPS/ProductList/ProductList";
+import { requestProducts, requestProductsByQuery } from "./services/api";
+import SearchFrom from "./components/SearchForm/SearchFrom";
 
 const AppHTTPS = () => {
   //* дані які прийшли з бекенду збергіаємо в  state,коли даних немає це - null
+  const [searchQuery, SetSearchQuery] = useState(null);
   const [items, setItems] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -21,8 +23,7 @@ const AppHTTPS = () => {
         //щоб випадково не висвітилася помилка
         setIsError(false);
 
-        const { data } = await axios.get("https://dummyjson.com/products");
-
+        const data = await requestProducts();
         //* записали у стейст(items) дані з запиту
         setItems(data.products);
       } catch (err) {
@@ -35,9 +36,35 @@ const AppHTTPS = () => {
     }
     fetchData();
   }, []);
+
+  //*слідкуємо за пошукаовим запитом перемалювуємо розмітку
+  useEffect(() => {
+    if (searchQuery === null) return;
+
+    async function fetchDataByQuery() {
+      try {
+        setIsLoading(true);
+        setIsError(false);
+
+        const data = await requestProductsByQuery(searchQuery);
+        setItems(data.products);
+      } catch (err) {
+        setIsError(true);
+        setErrMsg(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchDataByQuery(); // якщо нічого не введено - виходь
+  }, [searchQuery]);
+  const onSetSearchQuery = (query) => {
+    SetSearchQuery(query);
+  };
   return (
     <div>
       <h1>Convenience store</h1>
+      <SearchFrom onSetSearchQuery={onSetSearchQuery} />
       {isError && <ErrorMessage errMsg={errMsg} />}
       {isLoading && <Loader />}
       {/* //*передаємо дані зі стейту */}
