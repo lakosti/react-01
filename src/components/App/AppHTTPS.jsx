@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import ErrorMessage from "./components/HTTPS/ErrorMessage/ErrorMessage";
-import Loader from "./components/HTTPS/Loader/Loader";
-import ProductList from "./components/HTTPS/ProductList/ProductList";
-import { requestProducts, requestProductsByQuery } from "./services/api";
-import SearchFrom from "./components/SearchForm/SearchFrom";
+import ErrorMessage from "../HTTPS/ErrorMessage/ErrorMessage";
+import Loader from "../HTTPS/Loader/Loader";
+import ProductList from "../HTTPS/ProductList/ProductList";
+import { requestProducts, requestProductsByQuery } from "../../services/api";
+import SearchFrom from "../SearchForm/SearchFrom";
 
 const AppHTTPS = () => {
   //* дані які прийшли з бекенду збергіаємо в  state,коли даних немає це - null

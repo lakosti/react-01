@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Gallery from "./components/ExampleHttps/Gallery";
+import Gallery from "../ExampleHttps/Gallery.jsx";
 import { BulletList } from "react-content-loader";
-import { fetchArticlesWithTopic } from "./services/articles-api.js";
-import { SearchInput } from "./components/ExampleHttps/SearchInput/SearchInput.jsx";
+import { fetchArticlesWithTopic } from "../../services/articles-api.js";
+import { SearchInput } from "../ExampleHttps/SearchInput/SearchInput.jsx";
 // const MyBulletListLoader = () => <BulletList />;
 
 const AppExampleHttps = () => {

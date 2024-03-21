@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import MailBox from "./components/MailBox";
-import ProductGallery from "./components/ProductGallery/ProductGallery";
+import MailBox from "../MailBox";
+import ProductGallery from "../ProductGallery/ProductGallery";
 
 import productData from "./productData"; // json object
-import ClickCounter from "./components/ClickCounter";
+import ClickCounter from "../ClickCounter";
 import { nanoid } from "nanoid";
-import MailBoxForm from "./components/MailBoxForm/MailBoxForm";
-import MailBoxForm2 from "./components/MailBoxForm/MailBoxForm2";
-import MailBoxForm3 from "./components/MailBoxForm/MailBoxForm3";
+import MailBoxForm from "../MailBoxForm/MailBoxForm";
+import MailBoxForm2 from "../MailBoxForm/MailBoxForm2";
+import MailBoxForm3 from "../MailBoxForm/MailBoxForm3";
 
 //компонент певний шаблон з даними який може бути перевикористаний
 // синтаксис XML розмітка JSX
