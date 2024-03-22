@@ -1,9 +1,11 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import MemoExample from "../MemoExample/MemoExample";
 
 //?useMemo -- використовується для опитимізації складних обчислень (воно слідкує за масивом залежностей певного елемента, я до поки він не змінитсья воно ці дані закешовує і не виконує перерендинг)
 
 //! коли інтерфйс починає підвисати тоді можемо використати useMemo
+
+//? Доступ до ДОМ елементів - useRef()
 
 const AppMemo = () => {
   const [counter, setCounter] = useState(0);
@@ -23,8 +25,26 @@ const AppMemo = () => {
     [feedback]
   );
 
+  //! Посилання на дом елемент -- використовується для координат, для скролу, стилів, фокусу, на скільки здвинувся елемент, для анімацій
+
+  // const btnRef = useRef();
+  const inputRef = useRef();
+
+  const onCounter = () => {
+    setCounter((prevState) => prevState + 1);
+  };
+
+  const onFocus = () => {
+    // console.log(btnRef.current); //доступ до DOM елемента
+    // console.log(btnRef.current.textContent); //доступ до тексту
+    // console.log(btnRef.current.classList); //доступ до класів
+    // console.log(getComputedStyle(btnRef.current).width); //доступ до стилів (width)
+    // console.log(btnRef.current.getBoundingClientRect()); // коордтинати
+    inputRef.current.focus(); // фокус на елементі (при кліці на кнопку фокус на інтуп)
+  };
   return (
     <>
+      <button onClick={onFocus}>Click to focus</button>
       <MemoExample
         total={totalFeedback}
         good={feedback.good}
@@ -32,12 +52,15 @@ const AppMemo = () => {
         bad={feedback.bad}
       />
       <h2>Counter: {counter}</h2>
-      <button onClick={() => setCounter((prevState) => prevState + 1)}>Click to count</button>
+      <button className="btn" onClick={onCounter}>
+        Click to count
+      </button>
       <button onClick={() => setCounter(0)}>Reset</button>
       {/* //*більшення одного фідбеку */}
       <button onClick={() => setFeedback({ ...feedback, bad: feedback.bad + 1 })}>
         Click to increase bad
       </button>
+      <input ref={inputRef} type="text" />
     </>
   );
 };
