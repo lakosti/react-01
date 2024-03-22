@@ -1,5 +1,7 @@
 import { useMemo, useRef, useState } from "react";
 import MemoExample from "../MemoExample/MemoExample";
+import ForwardRef from "../ForwardRef/ForwardRef";
+// import useFeebdack from "../../hooks/useFeebdack";
 
 //?useMemo -- використовується для опитимізації складних обчислень (воно слідкує за масивом залежностей певного елемента, я до поки він не змінитсья воно ці дані закешовує і не виконує перерендинг)
 
@@ -9,6 +11,8 @@ import MemoExample from "../MemoExample/MemoExample";
 
 const AppMemo = () => {
   const [counter, setCounter] = useState(0);
+  //!КОСТОМНИЙ ХУК
+  //? const { feedback, totalFeedback, setFeedback } = useFeebdack();
   const [feedback, setFeedback] = useState({
     good: 5,
     neutral: 10,
@@ -51,6 +55,7 @@ const AppMemo = () => {
         neutral={feedback.neutral}
         bad={feedback.bad}
       />
+      <ForwardRef ref={inputRef} />
       <h2>Counter: {counter}</h2>
       <button className="btn" onClick={onCounter}>
         Click to count
