@@ -4,3 +4,24 @@
   place-content: center;
   gap: 40px;
 }
+.header {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid black;
+}
+.headerLink {
+  display: flex;
+  padding: 15px 25px;
+  text-decoration: none;
+  color: black;
+  background-color: transparent;
+  border: 1px solid black;
+  transition: all 0.5s;
+}
+
+.active {
+  color: white;
+  background-color: black;
+}
