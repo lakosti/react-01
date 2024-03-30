@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const ProductListItem = ({ item }) => {
   return (
     <>
@@ -8,6 +10,8 @@ const ProductListItem = ({ item }) => {
         <p>Brand: {item.brand}</p>
         <p>Price: {item.price}</p>
       </div>
+      {/* //*ДОБАВЛЯЄМО УНІКАЛЬНИЙ АЙДІ КОЖНОМУ ЕЛЕМЕНТУ */}
+      <Link to={`/products/${item.id}`}>See datails </Link>
     </>
   );
 };

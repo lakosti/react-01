@@ -1,76 +1,116 @@
-import { useState } from "react";
-import { useEffect } from "react";
-import ErrorMessage from "../components/HTTPS/ErrorMessage/ErrorMessage.jsx";
-import Loader from "../components/HTTPS/Loader/Loader.jsx";
-import ProductList from "../components/HTTPS/ProductList/ProductList.jsx";
-import { requestProducts, requestProductsByQuery } from "../services/api.js";
-import SearchFrom from "../components/SearchForm/SearchFrom.jsx";
+import { useEffect, useState } from "react";
+import MailBox from "../components/MailBox.jsx";
+import ProductGallery from "../components/ProductGallery/ProductGallery.jsx";
 
-const HomePage = () => {
-  //* дані які прийшли з бекенду збергіаємо в  state,коли даних немає це - null
-  const [searchQuery, SetSearchQuery] = useState(null);
-  const [items, setItems] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [errMsg, setErrMsg] = useState(false); //текс помилки
+import productData from "../productData.json";
+import ClickCounter from "../components/ClickCounter.jsx";
+import { nanoid } from "nanoid";
+import MailBoxForm from "../components/MailBoxForm/MailBoxForm.jsx";
+import MailBoxForm2 from "../components/MailBoxForm/MailBoxForm2.jsx";
+import MailBoxForm3 from "../components/MailBoxForm/MailBoxForm3.jsx";
 
-  //* робиться перший раз запит коли користувач тільки відкрив сторінку
+const emailsData = [
+  {
+    id: "1",
+    email: "alex@example.com",
+    userName: "Arab",
+    preferredColor: null,
+    subscription: "standart",
+  },
+  {
+    id: "2",
+    email: "oleg@example.com",
+    userName: "Alex",
+    preferredColor: null,
+    subscription: "vip",
+  },
+  {
+    id: "3",
+    email: "igor@example.com",
+    userName: "Igor",
+    preferredColor: null,
+    subscription: "premium",
+  },
+];
+
+function MailBoxPages() {
+  //*  гетер(ініціазізуємо)  сетер(функція -- встановлюємо/оновлюємо)
+  const [counter, setCounter] = useState(0);
+  const [clicks, setClicks] = useState(0);
+  //*показувати чи ховати розмітку
+  const [showMailBox, setshowMailBox] = useState(false);
+
+  //? РОБОТА ЗІ СХОВИЩЕМ (ОТРИМАННЯ З) + ВИДАЛЕННЯ
+  const [emails, setEmails] = useState(() => {
+    const stringifiedEmail = localStorage.getItem("emails");
+    if (!stringifiedEmail) return emailsData; // якщо нічого немає поверни об'єкт
+    const parsedEmails = JSON.parse(stringifiedEmail); //! ЗІ СТРОКИ В ОБ'ЄКТ
+    return parsedEmails;
+  });
+  //? РОБОТА ЗІ СХОВИЩЕМ (ВСТАНОВЛЕННЯ В)
   useEffect(() => {
-    async function fetchData() {
-      try {
-        //*відображаємо лоадер перед запитом
-        setIsLoading(true);
-        //щоб випадково не висвітилася помилка
-        setIsError(false);
+    localStorage.setItem("emails", JSON.stringify(emails)); //! З ОБ'ЄКТА В СТРОКУ
+  }, [emails]);
 
-        const data = await requestProducts();
-        //* записали у стейст(items) дані з запиту
-        setItems(data.products);
-      } catch (err) {
-        setIsError(true);
-        setErrMsg(err.message);
-      } finally {
-        //* вимкнули лоадер
-        setIsLoading(false);
-      }
-    }
-    fetchData();
-  }, []);
-
-  //*слідкуємо за пошукаовим запитом перемалювуємо розмітку
   useEffect(() => {
-    if (searchQuery === null) return;
+    if (counter === 0) return;
+    console.log("Count this email = ", counter);
+  }, [counter]); //!слідкуємо за зміною лічильника
 
-    async function fetchDataByQuery() {
-      try {
-        setIsLoading(true);
-        setIsError(false);
-
-        const data = await requestProductsByQuery(searchQuery);
-        setItems(data.products);
-      } catch (err) {
-        setIsError(true);
-        setErrMsg(err.message);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    fetchDataByQuery(); // якщо нічого не введено - виходь
-  }, [searchQuery]);
-  const onSetSearchQuery = (query) => {
-    SetSearchQuery(query);
+  const onLogEmail = () => {
+    console.log("Email was sent");
   };
+  const deleteById = (id) => {
+    //*ВИДАЛЕННЯ ЕЛЕМЕНТА
+
+    setEmails((prevState) => prevState.filter((email) => email.id !== id));
+  };
+  //*ДОДАВАННЯ ЕЛЕМЕНТА
+  const onAddNewEmailData = (mailData) => {
+    const newEmail = {
+      ...mailData,
+      id: nanoid(),
+    };
+
+    setEmails((prevState) => [...prevState, newEmail]);
+  };
+
+  //*показувати чи ховати розмітку
+  const handleShowMail = () => {
+    setshowMailBox((prevState) => !prevState);
+  };
+
+  const handleClick = () => {
+    setClicks(clicks + 1);
+  };
+
   return (
     <div>
-      <h1>Convenience store</h1>
-      <SearchFrom onSetSearchQuery={onSetSearchQuery} />
-      {isError && <ErrorMessage errMsg={errMsg} />}
-      {isLoading && <Loader />}
-      {/* //*передаємо дані зі стейту */}
-      <ProductList items={items} />
+      <ClickCounter value={clicks} onUpdate={handleClick} />
+      <ClickCounter value={clicks} onUpdate={handleClick} />
+
+      <button onClick={() => setClicks(clicks + 1)}>You clicked {clicks} times</button>
+      <h1> Email counter: {counter}</h1>
+
+      <MailBoxForm addNewData={onAddNewEmailData} />
+      <MailBoxForm2 addNewData={onAddNewEmailData} />
+      <MailBoxForm3 addNewData={onAddNewEmailData} />
+
+      <button onClick={handleShowMail}>{showMailBox ? "Hide" : "Show"} MailBox</button>
+
+      {showMailBox ? (
+        <MailBox
+          onClose={handleShowMail}
+          emails={emails}
+          emailCounter={counter}
+          onLogEmail={onLogEmail}
+          onDeleteEmail={deleteById}
+        />
+      ) : null}
+
+      <ProductGallery productData={productData} />
     </div>
   );
-};
+}
 
-export default HomePage;
+export default MailBoxPages;

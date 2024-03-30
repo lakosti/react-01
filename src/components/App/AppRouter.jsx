@@ -1,9 +1,11 @@
-import { NavLink, Route, Routes } from "react-router-dom";
-import HomePage from "../../pages/HomePage";
-import MailBoxPages from "../../pages/MailBoxPage";
+import { NavLink, Navigate, Route, Routes } from "react-router-dom";
+import MailBoxPages from "../../pages/HomePage";
 import css from "../../App.module.css";
 import classNames from "classnames";
-import Welcome from "../Welcome";
+import Welcome from "../../pages/Welcome";
+import ProductDetail from "../../pages/ProductDetail";
+import Products from "../../pages/Products";
+import SearchPage from "../../pages/SearchPage";
 const AppRouter = () => {
   //?у функцію приходять пропси ми з ним витягуємо isActive потім пишемо утилітарний клас, стилі якого будуть завди потім за умовою додаємо інший клас
 
@@ -21,15 +23,21 @@ const AppRouter = () => {
         <NavLink className={getNavLinkClassNames} to="/home">
           Home
         </NavLink>
-        <NavLink className={getNavLinkClassNames} to="/products">
+        <NavLink className={getNavLinkClassNames} to="/products" end>
           Products
+        </NavLink>
+        <NavLink className={getNavLinkClassNames} to="/search">
+          Find Products
         </NavLink>
       </header>
       <main>
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/home" element={<MailBoxPages />} />
-          <Route path="/products" element={<HomePage />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/:productId/*" element={<ProductDetail />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
     </div>

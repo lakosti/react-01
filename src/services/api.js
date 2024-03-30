@@ -9,3 +9,7 @@ export const requestProductsByQuery = async (query) => {
   const { data } = await axios.get(`https://dummyjson.com/products/search?q=${query}`);
   return data;
 };
+export const requestProductById = async (id) => {
+  const { data } = await axios.get(`https://dummyjson.com/products/${id}`);
+  return data;
+};
