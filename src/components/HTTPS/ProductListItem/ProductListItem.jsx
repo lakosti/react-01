@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const ProductListItem = ({ item }) => {
+  const location = useLocation();
   return (
     <>
       <h3>{item.title}</h3>
@@ -11,7 +12,9 @@ const ProductListItem = ({ item }) => {
         <p>Price: {item.price}</p>
       </div>
       {/* //*ДОБАВЛЯЄМО УНІКАЛЬНИЙ АЙДІ КОЖНОМУ ЕЛЕМЕНТУ */}
-      <Link to={`/products/${item.id}`}>See datails </Link>
+      <Link state={location} to={`/products/${item.id}`}>
+        See datails
+      </Link>
     </>
   );
 };

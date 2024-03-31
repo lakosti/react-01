@@ -39,18 +39,17 @@ const SearchPage = () => {
     fetchDataByQuery();
   }, [searchQuery]);
   const onSetSearchQuery = (seacrhTerm) => {
-    // SetSearchQuery(query);
     //*перевірка на пустий рядок
-    if (seacrhTerm.length === 0) {
-      alert("Please enter something");
-      return;
-    }
+    // if (seacrhTerm.length === 0) {
+    //   alert("Please enter something");
+    //   return;
+    // }
     SetSearchParams({ query: seacrhTerm });
   };
   return (
     <div>
       <h1>Find products</h1>
-      <SearchFrom onSetSearchQuery={onSetSearchQuery} />
+      <SearchFrom searchQuery={searchQuery} onSetSearchQuery={onSetSearchQuery} />
       {isError && <ErrorMessage errMsg={errMsg} />}
       {isLoading && <Loader />}
       {/* //*передаємо дані зі стейту */}

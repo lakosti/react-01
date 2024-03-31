@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, Route, Routes, useLocation, useParams } from "react-router-dom";
 import { requestProductById } from "../services/api";
 import Loader from "../components/HTTPS/Loader/Loader";
 import ErrorMessage from "../components/HTTPS/ErrorMessage/ErrorMessage";
+import Comments from "../components/Comments";
 
 const ProductDetail = () => {
   //*ДОСТУП ДО АЙДІ через useParams
   const { productId } = useParams();
+  const location = useLocation();
+  //? збереження значення сторінки звідки ми прийшли
+  const backLinkRef = useRef(location.state ?? "/search");
 
   const [seeMore, setSeeMore] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -36,6 +40,7 @@ const ProductDetail = () => {
       {isError && <ErrorMessage />}
       {seeMore !== null && (
         <div>
+          <Link to={backLinkRef.current}>Go back</Link>
           <h3>Details for products</h3>
           <h4>{seeMore.title}</h4>
           <p>Price: {seeMore.price}</p>
@@ -50,6 +55,12 @@ const ProductDetail = () => {
           </ul>
         </div>
       )}
+      <div>
+        <Link to="comments">Comments</Link>
+      </div>
+      <Routes>
+        <Route path="comments" element={<Comments />} />
+      </Routes>
     </>
   );
 };
