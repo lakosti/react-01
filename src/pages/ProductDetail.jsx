@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import { Link, Route, Routes, useLocation, useParams } from "react-router-dom";
 import { requestProductById } from "../services/api";
 import Loader from "../components/HTTPS/Loader/Loader";
 import ErrorMessage from "../components/HTTPS/ErrorMessage/ErrorMessage";
-import Comments from "../components/Comments";
+
+const Comments = lazy(() => import("../components/Comments"));
 
 const ProductDetail = () => {
   //*ДОСТУП ДО АЙДІ через useParams
@@ -58,9 +59,11 @@ const ProductDetail = () => {
       <div>
         <Link to="comments">Comments</Link>
       </div>
-      <Routes>
-        <Route path="comments" element={<Comments />} />
-      </Routes>
+      <Suspense>
+        <Routes>
+          <Route path="comments" element={<Comments />} />
+        </Routes>
+      </Suspense>
     </>
   );
 };
