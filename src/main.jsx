@@ -3,6 +3,9 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import AppRouter from "./components/App/AppRouter";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
+
 // import AppMemo from "./components/App/AppMemo";
 // import App from "./components/App/App.jsx"; //глобальний компонент
 // import AppExampleHttps from "./components/App/AppExampleHttps.jsx";
@@ -14,9 +17,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   // <AppHTTPS />
   // <AppExampleHttps />
   // <AppMemo />
-  <BrowserRouter>
-    <AppRouter />
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
+      <AppRouter />
+    </BrowserRouter>
+  </Provider>
+
   // <App/>
   // </React.StrictMode>
 );
