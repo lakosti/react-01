@@ -19,14 +19,12 @@
  
  * //* Action -- це об'єкт в якого обов'язково має бути поле type такоє може бути поле payload => {type: 'some/typename', payload?: someData"}
  *  */
-import { combineReducers, createStore } from "redux";
-import { devToolsEnhancer } from "@redux-devtools/extension";
-import { productDetailsReducer } from "./productDetailReducer";
 
-const rootReducer = combineReducers({
-  productDetails: productDetailsReducer,
+import { productsDetailsReducer } from "./productDetailReducer";
+import { configureStore } from "@reduxjs/toolkit";
+
+export const store = configureStore({
+  reducer: {
+    productDetails: productsDetailsReducer,
+  },
 });
-
-//devTools
-const enhancer = devToolsEnhancer();
-export const store = createStore(rootReducer, enhancer);

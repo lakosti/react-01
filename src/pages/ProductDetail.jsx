@@ -1,9 +1,10 @@
-import { Suspense, lazy, useEffect, useRef, useState } from "react";
+import { Suspense, lazy, useEffect, useRef } from "react";
 import { Link, Route, Routes, useLocation, useParams } from "react-router-dom";
 import { requestProductById } from "../services/api";
 import Loader from "../components/HTTPS/Loader/Loader";
 import ErrorMessage from "../components/HTTPS/ErrorMessage/ErrorMessage";
 import { useDispatch, useSelector } from "react-redux";
+import { setIsError, setIsLoading, setSeeMore } from "../redux/productDetailReducer";
 
 const Comments = lazy(() => import("../components/Comments"));
 
@@ -32,42 +33,36 @@ const ProductDetail = () => {
       try {
         //! loading
         // setIsLoading(true);
-        const loadingEnableAction = {
-          type: "details/setIsLoading",
-          payload: true,
-        };
-        dispatch(loadingEnableAction);
+        //*старий приклад
+        // const loadingEnableAction = {
+        //   type: "details/setIsLoading",
+        //   payload: true,
+        // };
+        // dispatch(loadingEnableAction);
 
+        dispatch(setIsLoading(true));
         //! error
         // setIsError(false);
-        const errorEnableAction = {
-          type: "details/setIsError",
-          payload: false,
-        };
-        dispatch(errorEnableAction);
-
+        dispatch(setIsError(false));
         const data = await requestProductById(productId);
         //! data
         // setSeeMore(data);
-        const setSeeMoreAction = {
-          type: "details/setSeeMore",
-          payload: data,
-        };
-        dispatch(setSeeMoreAction);
+
+        // const setSeeMoreAction = {
+        //   type: "details/setSeeMore",
+        //   payload: data,
+        // };
+        // dispatch(setSeeMoreAction);
+
+        dispatch(setSeeMore(data));
       } catch (err) {
         // setIsError(true);
-        const errorEnableAction = {
-          type: "details/setIsError",
-          payload: true,
-        };
-        dispatch(errorEnableAction);
+
+        dispatch(setIsError(true));
       } finally {
         // setIsLoading(false);
-        const loadingEnableAction = {
-          type: "details/setIsLoading",
-          payload: false,
-        };
-        dispatch(loadingEnableAction);
+
+        dispatch(setIsLoading(false));
       }
     }
     fetchData();
