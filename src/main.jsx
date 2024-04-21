@@ -4,7 +4,8 @@ import "./index.css";
 import AppRouter from "./components/App/AppRouter";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { store } from "./redux/store";
+import { persistor, store } from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
 
 // import AppMemo from "./components/App/AppMemo";
 // import App from "./components/App/App.jsx"; //глобальний компонент
@@ -18,9 +19,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   // <AppExampleHttps />
   // <AppMemo />
   <Provider store={store}>
-    <BrowserRouter>
-      <AppRouter />
-    </BrowserRouter>
+    <PersistGate persistor={persistor} loading={null}>
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
+    </PersistGate>
   </Provider>
 
   // <App/>

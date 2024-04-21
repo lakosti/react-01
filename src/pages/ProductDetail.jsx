@@ -5,6 +5,7 @@ import Loader from "../components/HTTPS/Loader/Loader";
 import ErrorMessage from "../components/HTTPS/ErrorMessage/ErrorMessage";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsError, setIsLoading, setSeeMore } from "../redux/productDetailReducer";
+import ReduxCounter from "../components/ReduxCounter/ReduxCounter";
 
 const Comments = lazy(() => import("../components/Comments"));
 
@@ -39,6 +40,8 @@ const ProductDetail = () => {
         //   payload: true,
         // };
         // dispatch(loadingEnableAction);
+        // //!action creaters
+        // dispatch(setIsLoading(true));
 
         dispatch(setIsLoading(true));
         //! error
@@ -69,6 +72,7 @@ const ProductDetail = () => {
   }, [productId, dispatch]);
   return (
     <>
+      <ReduxCounter />
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
       {seeMore !== null && (

@@ -51,6 +51,14 @@ const INITIAL_STATE = {
 //   }
 // };
 
+//! action creaters
+export const setIsLoadingAC = (payload) => {
+  return {
+    type: "details/setIsLoading",
+    payload,
+  };
+};
+
 const productsDetailsSlice = createSlice({
   // Ім'я слайсу
   name: "productsDetails",
@@ -58,6 +66,13 @@ const productsDetailsSlice = createSlice({
   initialState: INITIAL_STATE,
   // Об'єкт редюсерів
   reducers: {
+    //* додавання / віднімання counter:
+    incrementCounter(state) {
+      state.counter += 1;
+    },
+    decrementCounter(state) {
+      state.counter -= 1;
+    },
     setSeeMore(state, action) {
       state.seeMore = action.payload; //*ПІД КАПОТОМ  МУТАБЕЛЬНИЙ КОД ПЕРЕТВОРЮЄ В ІМУТАБЕЛЬНИЙ
       // return { ...state, isLoading: action.payload };
@@ -90,8 +105,15 @@ const productsDetailsSlice = createSlice({
 });
 
 // Генератори actionCreator
-export const { setSeeMore, setIsLoading, setIsError, addContact, deleteContact } =
-  productsDetailsSlice.actions;
+export const {
+  decrementCounter,
+  incrementCounter,
+  setSeeMore,
+  setIsLoading,
+  setIsError,
+  addContact,
+  deleteContact,
+} = productsDetailsSlice.actions;
 
 // Редюсер слайсу
 export const productsDetailsReducer = productsDetailsSlice.reducer;

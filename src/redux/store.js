@@ -22,9 +22,35 @@
 
 import { productsDetailsReducer } from "./productDetailReducer";
 import { configureStore } from "@reduxjs/toolkit";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
+
+const productDetailsConfig = {
+  key: "productDetails",
+  storage,
+  whitelist: ["counter"],
+  //blacklist -- ті які не потрібно зберігати
+};
 
 export const store = configureStore({
   reducer: {
-    productDetails: productsDetailsReducer,
+    productDetails: persistReducer(productDetailsConfig, productsDetailsReducer), //* стейт нашого додатку
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
+
+export const persistor = persistStore(store);
